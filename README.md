@@ -1,4 +1,4 @@
-# xexpr XML utilities
+# xexpr XML and HTML utilities
 
 ## Copyright and Licence
 
