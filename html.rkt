@@ -12,6 +12,8 @@
          html5-element?
 
          html-xexpr->string
+
+         trim-content
          )
 
 (require (only-in xml empty-tag-shorthand xexpr->string))
@@ -177,3 +179,12 @@
   (parameterize ((empty-tag-shorthand *void-elements*))
     ;; ^ Void elements aren't *quite* empty-tags, but close enough.
     (xexpr->string xexpr)))
+
+(define (trim-content #:left? [left? #t] #:right? [right? #t] items)
+  (match items
+    [(list) (list)]
+    [(list X) (list (if (string? X) (string-trim #:left? left? #:right? right? X) X))]
+    [(list L Ms ... R)
+     `(,(if (string? L) (string-trim #:left? left? #:right? #f L) L)
+       ,@Ms
+       ,(if (string? R) (string-trim #:left? #f #:right? right? R) R))]))
