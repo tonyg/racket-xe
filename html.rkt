@@ -32,7 +32,6 @@
 
 (define-syntax-rule (define-tag-maker tag ...)
   (begin
-    (println 'tag) ...
     (define tag (tag-maker 'tag)) ...))
 
 (define-syntax-rule (define/provide-tag-maker tag ...)
