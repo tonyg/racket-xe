@@ -33,6 +33,7 @@
 
          ;; Filters: narrow down a selection without moving
          =path   ;; Applies a nested path, keeps nodes having submatches
+         =not    ;; Inverts sense of nested path, keeps nodes WITHOUT submatches
          =tag    ;; Matches a tag
          =@      ;; Matches an attribute with a particular value
          =@?     ;; Matches a present attribute
@@ -279,6 +280,10 @@
 (define (=path . steps)
   (match-lambda [(and s (path-selection c e))
                  (if (null? (xexpr@** c e steps)) '() s)]))
+
+(define (=not . steps)
+  (match-lambda [(and s (path-selection c e))
+                 (if (pair? (xexpr@** c e steps)) '() s)]))
 
 (define (=tag t)
   (match-lambda [(and s (path-selection _ (xe* (== t) _ _))) s]
