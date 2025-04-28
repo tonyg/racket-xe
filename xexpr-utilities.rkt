@@ -16,6 +16,8 @@
 
          clean-xexpr-whitespace
 
+         nodes->text
+
          (struct-out path-selection)
          xexpr@*
          xexpr@
